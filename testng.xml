@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Hey Linda App Test Suite">
+	<test name="Hey Linda App Tests">
+		<classes>
+			<class name="MeditateTest" />
+			<class name="TrackProgressTest" />
+			<class name="TimeListenTest" />
+		</classes>
+	</test>
+</suite>
