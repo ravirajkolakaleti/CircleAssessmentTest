@@ -19,7 +19,7 @@ public class HomePage {
 
     public HomePage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+ //       this.wait = new WebDriverWait(driver, 10);
         PageFactory.initElements(driver, this);
     }
 

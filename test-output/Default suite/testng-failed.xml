@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Tests.HeyLindaTest">
+      <class name="Tests.LindaNavTest">
         <methods>
-          <include name="tearDown"/>
+          <include name="testHeyLindaApp"/>
           <include name="setUp"/>
-          <include name="testMeditationScenario"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- Tests.HeyLindaTest -->
+      </class> <!-- Tests.LindaNavTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

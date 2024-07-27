@@ -2,9 +2,10 @@
 <suite name="Hey Linda App Test Suite">
 	<test name="Hey Linda App Tests">
 		<classes>
-			<class name="MeditateTest" />
 			<class name="TrackProgressTest" />
-			<class name="TimeListenTest" />
+			<class name="EmulatorTest" />
+			<class name="HeyLindaTest" />
+			<class name="LindaMeditateTest" />
 		</classes>
 	</test>
 </suite>
