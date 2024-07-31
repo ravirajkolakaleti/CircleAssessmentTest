@@ -11,7 +11,7 @@ import io.appium.java_client.android.AndroidElement;
 
 public class BaseTest {
 	
-	AndroidDriver<?> driver = null;
+	AndroidDriver<AndroidElement> driver = null;
 	
 	
 	@BeforeTest

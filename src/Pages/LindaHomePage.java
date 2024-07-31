@@ -7,30 +7,31 @@ import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class LindaHomePage {
 	
-	private AndroidDriver<MobileElement> driver;
+	private AndroidDriver<AndroidElement> driver;
 	
-	public void HomLindaHomePageePage(AndroidDriver<MobileElement> driver) {
+	public LindaHomePage(AndroidDriver<AndroidElement> driver) {
 		
-	this.driver = driver;
+		this.driver = driver;
 		
 		PageFactory.initElements(driver, this);
 		
 	}
 	
 	@FindBy(xpath = "//android.widget.TextView[@text='Power of Love']")
-	MobileElement Meditation;
+	AndroidElement Meditation;
 	
 	@FindBy(xpath = "//android.widget.TextView[@text='']")
-	MobileElement Home;
+	AndroidElement Home;
 	
 	@FindBy(xpath = "//android.widget.TextView[@text=\"\"]")
-	MobileElement Stats;
+	AndroidElement Stats;
 	
 	@FindBy(xpath = "//android.widget.TextView[@text=\"Deep Sleep\"]")
-	MobileElement Sleep1;
+	AndroidElement Sleep1;
 	
 	public void Meditation1() {
 		

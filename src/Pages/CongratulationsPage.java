@@ -9,13 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class CongratulationsPage {
 	
-	private AndroidDriver<MobileElement> driver;
+	private AndroidDriver<AndroidElement> driver;
 	
 	
-	public CongratulationsPage(AndroidDriver<MobileElement> driver) {
+	public CongratulationsPage(AndroidDriver<AndroidElement> driver) {
 		
 		this.driver = driver;
 		
@@ -24,19 +25,19 @@ public class CongratulationsPage {
 	
 	@FindBy(xpath= "//android.widget.TextView[@resource-id=\"themed-text\" and @text='Congratulations!']")
 	
-	MobileElement CongratulationsText;
+	AndroidElement CongratulationsText;
 	
 	@FindBy(xpath="//android.widget.TextView[@text='DONATE']")
 	
-	MobileElement DonateText;
+	AndroidElement DonateText;
 	
 	@FindBy(xpath= "//android.widget.TextView[@text='DONATE']")
 	
-	MobileElement DonateButton;
+	AndroidElement DonateButton;
 	
 	@FindBy(xpath= "//android.widget.TextView[@text='SKIP']")
 	
-	MobileElement SkipButton;
+	AndroidElement SkipButton;
 	
 	public void CongratsText() {
 		

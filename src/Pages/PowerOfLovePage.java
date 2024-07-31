@@ -6,11 +6,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class PowerOfLovePage {
-	private AndroidDriver<MobileElement> driver;
+	private AndroidDriver<AndroidElement> driver;
 	
-	public PowerOfLovePage(AndroidDriver<MobileElement> driver) {
+	public PowerOfLovePage(AndroidDriver<AndroidElement> driver) {
 		
 		this.driver = driver;
 		
@@ -20,30 +21,30 @@ public class PowerOfLovePage {
 	
 	@FindBy(xpath= "//android.widget.TextView[@resource-id=\"themed-text\" and @text='Power of Love']")
 	
-	MobileElement PageText;
+	AndroidElement PageText;
 	
 	@FindBy(xpath= "//android.widget.TextView[@resource-id=\"themed-text\" and @text='00:00']")
 	
-	MobileElement LeftCounter;
+	AndroidElement LeftCounter;
 	
 	@FindBy(xpath= "//android.widget.TextView[@text='']")
-	MobileElement BackSkip;
+	AndroidElement BackSkip;
 	
 	@FindBy(xpath= "//android.widget.TextView[@text='']")
-	MobileElement StartButton;
+	AndroidElement StartButton;
 	
 	@FindBy(xpath= "//android.widget.TextView[@text='']")
 	
-	MobileElement ForwardSkip;
+	AndroidElement ForwardSkip;
 	
 	@FindBy(xpath= "//android.widget.TextView[@resource-id=\"themed-text\" and @text='02:15']")
-	MobileElement RightCounter;
+	AndroidElement RightCounter;
 	
 	
 	
 	public void PageTitle() {
 		
-		MobileElement powerOfLovePage = driver
+		AndroidElement powerOfLovePage = driver
 				.findElementByXPath("//android.widget.TextView[@text='Power of Love']");
 		if (powerOfLovePage.isDisplayed()) {
 			System.out.println("Power of Love page is displayed");
@@ -56,7 +57,7 @@ public class PowerOfLovePage {
 	
 	public void LeftCounter() {
 		
-		MobileElement themedTextCounter = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='themed-text' and @text='00:00']"));
+		AndroidElement themedTextCounter = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='themed-text' and @text='00:00']"));
 		if (themedTextCounter.isDisplayed() && themedTextCounter.getText().matches("\\d{2}:\\d{2}")) {
 			System.out.println("Session started and counter clock is running");
 		} else {

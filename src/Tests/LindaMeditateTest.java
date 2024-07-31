@@ -3,8 +3,8 @@ package Tests;
 import Pages.CongratulationsPage;
 import Pages.LindaHomePage;
 import Pages.PowerOfLovePage;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,16 +12,17 @@ import org.testng.annotations.Test;
 
 public class LindaMeditateTest extends BaseTest {
 
-	private AndroidDriver<MobileElement> driver;
+	private AndroidDriver<AndroidElement> driver;
 	
 	CongratulationsPage cpg = new CongratulationsPage(driver);
-	LindaHomePage pg= new LindaHomePage();
+	LindaHomePage homepage = new LindaHomePage(driver);
 	PowerOfLovePage ppg = new PowerOfLovePage(driver);
-
+	
+	
 	@Test
 	public void testMeditation() {
 		
-		pg.Meditation1();
+		homepage.Meditation1();
 		
 		ppg.PageTitle();
 		
