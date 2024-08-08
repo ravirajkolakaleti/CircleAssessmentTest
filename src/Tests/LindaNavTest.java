@@ -1,6 +1,8 @@
 package Tests;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,14 +16,15 @@ import org.testng.annotations.Test;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class LindaNavTest {
-    @SuppressWarnings("rawtypes")
-	private AndroidDriver driver;
+    private AndroidDriver<AndroidElement> driver;
 
-    @SuppressWarnings("rawtypes")
-	@BeforeClass
+    @BeforeClass
     public void setUp() throws Exception {
+    	
+    	
         // Set the desired capabilities
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", "emulator-5554");
@@ -31,12 +34,12 @@ public class LindaNavTest {
         caps.setCapability("appPackage", "com.meditation.heylinda");
         caps.setCapability("appActivity", "com.meditation.heylinda.MainActivity");
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), caps);
+        driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723"), caps);
 
         Thread.sleep(5000);
     }
 
-    @Test
+    @Test(priority=2)
     public void testHeyLindaApp() throws InterruptedException {
         // Open the Hey Linda app (Assuming it opens automatically with the driver initialization)
 
@@ -50,19 +53,19 @@ public class LindaNavTest {
         
         deepSleepElement.click();
         
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         
         WebElement deepSleepText = driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"themed-text\" and @text=\"Deep Sleep\"]"));
         Assert.assertTrue(deepSleepText.isDisplayed(), "Deep Sleep text is not displayed");
         System.out.println("Deep Sleep Screen is displayed: " + deepSleepText.getText());
         
-        Thread.sleep(3000);
+        
         
         WebElement goBack = driver.findElement(By.xpath("//android.widget.Button[@content-desc=\"Go back\"]/android.widget.ImageView"));
         goBack.click();
         
+      
         Thread.sleep(3000);
-        
 
         // Swipe down to get to Popular section
         swipeDown();
@@ -83,7 +86,7 @@ public class LindaNavTest {
         
         swipeLeft(QuickPowerfulElement);
         
-        Thread.sleep(2000);
+        Thread.sleep(3000);
       
         
         WebElement DeepBreathingElement = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Deep Breathing\"]"));
@@ -98,7 +101,7 @@ public class LindaNavTest {
         
         yawnAndStretchElement.click();
         
-        Thread.sleep(3000);
+        
         
      // Get Yawn and Stretch screen text and print it
         WebElement yawnAndStretchText = driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"themed-text\" and @text=\"Yawn and Stretch\"]"));
@@ -113,11 +116,11 @@ public class LindaNavTest {
         // Swipe right to get back to Power of Love and get Power of Love text and print it
         swipeRight(yawnAndStretchElement);
         
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         
         swipeRight(DeepBreathingElement);
         
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         
         swipeRight(QuickPowerfulElement);
 

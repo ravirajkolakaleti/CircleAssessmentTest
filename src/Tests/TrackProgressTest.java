@@ -27,6 +27,9 @@ public class TrackProgressTest {
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
+    	
+    	driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    	
     	 DesiredCapabilities caps = new DesiredCapabilities();
          caps.setCapability("browserstack.user", userName);
          caps.setCapability("browserstack.key", accessKey);
@@ -41,7 +44,7 @@ public class TrackProgressTest {
          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Test
+    @Test(priority=3)
     public void testHeyLindaApp() {
         //  Look for Quick Powerful Meditation, get text, print it and click on it.
         MobileElement meditationElement = driver.findElement(By.xpath("//android.widget.TextView[@text='Quick Powerful Meditation']"));

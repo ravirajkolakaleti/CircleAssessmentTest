@@ -3,44 +3,51 @@ package Tests;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-
 public class NewTestLindaApp {
+	
+	private AndroidDriver<AndroidElement> driver = null;
+	
+	@BeforeTest
+	public void Appsetup() throws InterruptedException, MalformedURLException {
+		
+		
 
-    public AndroidDriver<AndroidElement> driver;
+		// Set the desired capabilities
+		DesiredCapabilities caps = new DesiredCapabilities();
 
-    @BeforeClass
-    public void setUp() throws MalformedURLException, InterruptedException {
-        // Set the desired capabilities
-        DesiredCapabilities caps = new DesiredCapabilities();
+		caps.setCapability("deviceName", "emulator-5554");
+		caps.setCapability("platformVersion", "8.1");
+		caps.setCapability("platformName", "Android");
+		caps.setCapability("automationName", "UiAutomator2");
+		
+		caps.setCapability("appPackage", "com.meditation.heylinda");
+		caps.setCapability("appActivity", "com.meditation.heylinda.MainActivity");
 
-        caps.setCapability("deviceName", "emulator-5554");
-        caps.setCapability("platformVersion", "8.1");
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("automationName", "UiAutomator2");
+		// com.meditation.heylinda.MainActivity - Hey linda challenge
+		//
 
-        caps.setCapability("appPackage", "com.meditation.heylinda");
-        caps.setCapability("appActivity", "com.meditation.heylinda.MainActivity");
+		driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723"), caps);
+		
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723"), caps);
+	}
 
-        Thread.sleep(5000);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @Test
+    @Test(priority=1)
     public void testHeyLindaApp() {
         // Look for Quick Powerful Meditation, get text, print it and click on it.
         MobileElement meditationElement = driver
@@ -75,7 +82,7 @@ public class NewTestLindaApp {
         while (!isSingleDigitRemaining) {
             try {
                 // Calculate and print the time difference every 30 seconds
-                Thread.sleep(40000); // Wait for 30 seconds
+            	Thread.sleep(40000); // Wait for 40 seconds
 
                 // Fetch and calculate the time difference
                 MobileElement leftCounter = driver
@@ -114,12 +121,16 @@ public class NewTestLindaApp {
         WebDriverWait wait = new WebDriverWait(driver, 330); // Adjust the timeout as needed
         WebElement congratulationsElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text=\"DONATE\"]")));
+        
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         // Proceed to click on Skip button and validate the home page
         if (congratulationsElement.isDisplayed()) {
             try {
                 MobileElement skipButton = driver.findElement(By.xpath("//android.widget.TextView[@text='SKIP']"));
                 skipButton.click();
+                
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
                 // Validate you are on the home page.
                 WebDriverWait homePageWait = new WebDriverWait(driver, 30);
@@ -132,12 +143,22 @@ public class NewTestLindaApp {
                 System.err.println("Exception while handling Skip button: " + e.getMessage());
             }
         }
+        
+    }
+        
+        @AfterTest
+    	public void teardown() {
+    		
+    		if (driver != null) {
+    			driver.quit();
+    			
+    	}
+
+    	}
     }
 
-    @AfterClass
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-}
+        
+    
+
+   
+

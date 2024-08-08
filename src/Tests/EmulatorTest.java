@@ -1,50 +1,20 @@
 package Tests;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import Utils.BasicTestDevice;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 
-public class EmulatorTest {
+public class EmulatorTest extends BasicTestDevice{
 
-	AndroidDriver<AndroidElement> driver = null;
-
-	@BeforeTest
-	public void Appsetup() throws InterruptedException, MalformedURLException {
-
-		// Set the desired capabilities
-		DesiredCapabilities caps = new DesiredCapabilities();
-
-		caps.setCapability("deviceName", "emulator-5554");
-		caps.setCapability("platformVersion", "8.1");
-		caps.setCapability("platformName", "Android");
-		caps.setCapability("automationName", "UiAutomator2");
-		
-		caps.setCapability("appPackage", "com.meditation.heylinda");
-		caps.setCapability("appActivity", "com.meditation.heylinda.MainActivity");
-
-		// com.meditation.heylinda.MainActivity - Hey linda challenge
-		//
-
-		driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723"), caps);
-
-		Thread.sleep(5000);
-
-	}
-
-	@Test
+	@Test(priority=4)
 
 	public void test1() throws InterruptedException {
 		// Look for Quick Powerful Meditation, get text, print it and click on it.
@@ -54,7 +24,7 @@ public class EmulatorTest {
 		System.out.println("Meditation Text: " + meditationText);
 		meditationElement.click();
 
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		// Validate Quick Powerful Meditation screen is displayed, get text of it and
 		// print it.
@@ -94,14 +64,16 @@ public class EmulatorTest {
 					isCongratulationScreenDisplayed = true;
 					String congratulationText = congratulationElement.getText();
 					System.out.println("Congratulation Text: " + congratulationText);
+					
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-					Thread.sleep(3000);
+				
 
 					// Click on Skip button.
 					MobileElement skipButton = driver.findElement(By.xpath("//android.widget.TextView[@text='SKIP']"));
 					skipButton.click();
 					
-					Thread.sleep(3000);
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 					// Validate you are on the home page.
 					MobileElement homePageElement = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='themed-text' and @text='POPULAR']"));
@@ -116,16 +88,11 @@ public class EmulatorTest {
 			}
 
 		}
-
+		
 	}
-
-	@AfterTest
-	public void teardown() {
-
-		if (driver != null) {
-			driver.quit();
-		}
-
-	}
-
+	
 }
+
+	
+
+	
